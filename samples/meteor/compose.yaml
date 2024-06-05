@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  meteor:
+    build: .
+    container_name: meteor
+    platform: linux/amd64
+    environment:
+      - MONGO_URL # your MONGODB URL
+      - ROOT_URL # your ROOT URL
+      - PORT=3000
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+        mode: ingress

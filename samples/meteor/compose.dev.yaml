@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  meteor-app:
+    build: .
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+        mode: ingress
+    environment:
+      MONGO_URL: mongodb://mongo:27017/meteor
+      ROOT_URL: http://localhost:3000
+      PORT: 3000
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - target: 27017
+        published: 27017
+        protocol: tcp
+        mode: host
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
