@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  langchain-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - OPENAI_API_KEY
+    ports:
+      - target: 80
+        published: 8080
+        protocol: tcp
+        mode: ingress
