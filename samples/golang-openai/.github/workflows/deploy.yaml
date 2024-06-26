@@ -27,5 +27,10 @@ jobs:
     - name: Login to Defang
       run: defang login
 
+    - name: Set config
+      run: echo $OPENAI_KEY | defang config set --name OPENAI_KEY
+      env:
+        OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+
     - name: Deploy
       run: defang compose up -v --detach
