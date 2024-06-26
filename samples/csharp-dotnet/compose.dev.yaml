@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  web:
+    image: csharp-dotnet
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - target: 80
+        published: 8080
+        mode: ingress
+    volumes:
+      - ./wwwroot:/app/wwwroot
+      - ./Pages:/app/Pages
+      - ./appsettings.Development.json:/app/appsettings.Development.json
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

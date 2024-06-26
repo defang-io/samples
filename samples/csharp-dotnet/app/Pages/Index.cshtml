@@ -1,0 +1,45 @@
+@page
+@model csharp_dotnet.Pages.IndexModel
+@{
+    ViewData["Title"] = "Task Manager";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Task Manager</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task" />
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    let tasks = [];
+
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const task = taskInput.value.trim();
+        if (task) {
+            tasks.push(task);
+            taskInput.value = '';
+            renderTasks();
+        }
+    }
+
+    function removeTask(index) {
+        tasks.splice(index, 1);
+        renderTasks();
+    }
+
+    function renderTasks() {
+        const taskList = document.getElementById('taskList');
+        taskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task + ' ';
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = () => removeTask(index);
+            li.appendChild(removeButton);
+            taskList.appendChild(li);
+        });
+    }
+</script>
