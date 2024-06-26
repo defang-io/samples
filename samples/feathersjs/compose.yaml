@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - target: 3030
+        published: 3030
+        protocol: tcp
+        mode: ingress
+    environment:
+      - NODE_ENV=production
